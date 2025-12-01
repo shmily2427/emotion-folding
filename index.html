@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情境折影 | Fragments of Affection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="ui-container">
+        <!-- 左上角：标题与情感提示 -->
+        <div id="title-section">
+            <h1>情境折影</h1>
+            <h2>Fragments of Affection</h2>
+            <p class="subtitle">从不同的角度，看见你与她之间的路。</p>
+            <div id="status-text">状态：母亲在为孩子寻找一条路。</div>
+            <div id="hint-text">提示：旋转视角，也许断裂只是误会。</div>
+        </div>
+
+        <!-- 右侧：交互按钮 -->
+        <div id="controls-section">
+            <h3>视角切换</h3>
+            <button id="btn-mother-view">母亲视角</button>
+            <button id="btn-child-view">孩子视角</button>
+            <button id="btn-emotional-view">情感视角对齐</button>
+
+            <h3>机关操作</h3>
+            <button id="btn-trigger-bridge">触发机关：引路</button>
+
+            <h3>记忆保存</h3>
+            <button id="btn-save-memory">保存此刻记忆</button>
+        </div>
+    </div>
+
+    <!-- Three.js 渲染容器 -->
+    <div id="canvas-container"></div>
+
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <!-- Three.js 扩展（正确做法：放到 window 下，而不是 THREE 下） -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        // 挂载到 window，而不是往 THREE 上加属性（THREE 是不可扩展的）
+        window.THREE = THREE;
+        window.OrbitControls = OrbitControls;
+        window.GLTFLoader = GLTFLoader;
+
+        // 通知整个项目 Three.js 已完全加载好
+        window.dispatchEvent(new Event('three-loaded'));
+    </script>
+
+    <!-- 主入口模块 -->
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
